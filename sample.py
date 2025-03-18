@@ -222,6 +222,27 @@ time.sleep(3)  # 等待几秒钟以确保 Ollama 正常加载
 
 print(tokenizer._ollama_modelfile)  # 输出 Ollama 模型文件路径
 
+
+########### Begin of Modelfile #################
 # 创建 Ollama 模型
-!ollama create unsloth_model -f ./model/Modelfile
-ollama run unsloth_model  # 运行 Ollama 模型
+# FROM {__FILE_LOCATION__}
+# TEMPLATE """Below are some instructions that describe some tasks. Write responses that appropriately complete each request.{{ if .Prompt }}
+
+# ### Instruction:
+# {{ .Prompt }}{{ end }}
+
+# ### Response:
+# {{ .Response }}<|end_of_text|>"""
+
+# PARAMETER stop "<|eot_id|>"
+# PARAMETER stop "<|start_header_id|>"
+# PARAMETER stop "<|end_header_id|>"
+# PARAMETER stop "<|end_of_text|>"
+# PARAMETER stop "<|reserved_special_token_"
+# PARAMETER temperature 1.5
+# PARAMETER min_p 0.1
+###########  END Of Modelfile  ############
+
+# create an Ollama model called unsloth_model using the Modelfile which we auto generated!
+# ollama create unsloth_model -f ./model/Modelfile
+# ollama run unsloth_model  # 运行 Ollama 模型
